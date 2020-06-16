@@ -1,0 +1,56 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: user-server-8001
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://47.111.122.217:3306/zxnm?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/yunplm?serverTimezone=GMT%2B8&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+    username: root
+    password: Lab-607615
+    platform: mysql
+    hikari:
+      idle-timeout: 60000
+      connection-timeout: 60000
+      validation-timeout: 3000
+      login-timeout: 5
+      max-lifetime: 60000
+
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  redis:
+    port: 6379
+    host: 127.0.0.1
+    database: 0
+#    password: Lab-607615
+    jedis:
+      pool:
+        max-active: 8
+        min-idle: 0
+        max-wait: 200
+        max-idle: 8
+
+#      config:
+#        server-addr: 127.0.0.1:8848
+#        file-extension: yaml
+# ${prefix}-${spring.profile.active}.${file-extension}
+# config-server-dev.yaml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
